@@ -4,7 +4,7 @@
 #
 Name     : jsonpath-rw
 Version  : 1.4.0
-Release  : 21
+Release  : 22
 URL      : http://pypi.debian.net/jsonpath-rw/jsonpath-rw-1.4.0.tar.gz
 Source0  : http://pypi.debian.net/jsonpath-rw/jsonpath-rw-1.4.0.tar.gz
 Summary  : A robust and significantly extended implementation of JSONPath for Python, with a clear AST for metaprogramming.
@@ -12,11 +12,17 @@ Group    : Development/Tools
 License  : Apache-2.0
 Requires: jsonpath-rw-bin
 Requires: jsonpath-rw-python
+Requires: decorator
+Requires: ply
+Requires: six
+BuildRequires : decorator
 BuildRequires : pbr
 BuildRequires : pip
+BuildRequires : ply
 BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
+BuildRequires : six
 
 %description
 Python JSONPath RW
@@ -43,13 +49,16 @@ python components for the jsonpath-rw package.
 %setup -q -n jsonpath-rw-1.4.0
 
 %build
+export LANG=C
+export SOURCE_DATE_EPOCH=1489024974
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
+export SOURCE_DATE_EPOCH=1489024974
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot}
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
+python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
 
 %files
 %defattr(-,root,root,-)
