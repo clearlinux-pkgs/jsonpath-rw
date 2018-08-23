@@ -4,24 +4,21 @@
 #
 Name     : jsonpath-rw
 Version  : 1.4.0
-Release  : 24
+Release  : 25
 URL      : http://pypi.debian.net/jsonpath-rw/jsonpath-rw-1.4.0.tar.gz
 Source0  : http://pypi.debian.net/jsonpath-rw/jsonpath-rw-1.4.0.tar.gz
 Summary  : A robust and significantly extended implementation of JSONPath for Python, with a clear AST for metaprogramming.
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: jsonpath-rw-bin
+Requires: jsonpath-rw-python3
 Requires: jsonpath-rw-python
 Requires: decorator
 Requires: ply
 Requires: six
+BuildRequires : buildreq-distutils3
 BuildRequires : decorator
-BuildRequires : pbr
-BuildRequires : pip
 BuildRequires : ply
-BuildRequires : python-dev
-BuildRequires : python3-dev
-BuildRequires : setuptools
 BuildRequires : six
 
 %description
@@ -38,9 +35,19 @@ bin components for the jsonpath-rw package.
 %package python
 Summary: python components for the jsonpath-rw package.
 Group: Default
+Requires: jsonpath-rw-python3
 
 %description python
 python components for the jsonpath-rw package.
+
+
+%package python3
+Summary: python3 components for the jsonpath-rw package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the jsonpath-rw package.
 
 
 %prep
@@ -51,15 +58,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1503094137
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1535065734
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1503094137
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -73,5 +77,7 @@ echo ----[ mark ]----
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python2*/*
+
+%files python3
+%defattr(-,root,root,-)
 /usr/lib/python3*/*
