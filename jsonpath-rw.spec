@@ -4,7 +4,7 @@
 #
 Name     : jsonpath-rw
 Version  : 1.4.0
-Release  : 27
+Release  : 28
 URL      : http://pypi.debian.net/jsonpath-rw/jsonpath-rw-1.4.0.tar.gz
 Source0  : http://pypi.debian.net/jsonpath-rw/jsonpath-rw-1.4.0.tar.gz
 Summary  : A robust and significantly extended implementation of JSONPath for Python, with a clear AST for metaprogramming.
