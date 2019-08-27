@@ -1,3 +1,0 @@
-# openstack needs version <2.0
-# once they update requirement, we can push >=2.0 versions
-watchurl=https://pypi.python.org/packages/source/j/jsonpath-rw/jsonpath-rw-(1[\d\.]*).tar.gz
